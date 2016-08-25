@@ -3,3 +3,4 @@
 celerybeat-schedule
 *.pid
 *.rdb
+/test_project/settings.py
