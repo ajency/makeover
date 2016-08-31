@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-31 14:12+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\views.py:42 .\views.py:103 .\views.py:289 .\views.py:330 .\views.py:375
+#: .\views.py:415 .\views.py:472
+msgid "Please pass a id"
+msgstr "Por favor, pasar un identificador"
+
+#: .\views.py:47 .\views.py:108 .\views.py:147 .\views.py:218 .\views.py:294
+#: .\views.py:335 .\views.py:380 .\views.py:420 .\views.py:477 .\views.py:527
+#: .\views.py:593 .\views.py:675 .\views.py:724
+msgid "No Data Found"
+msgstr "Datos no encontrados"
+
+#: .\views.py:72
+msgid "JSON Error"
+msgstr "JSON error"
+
+#: .\views.py:77
+msgid "Please enter valid request id."
+msgstr "Por favor, introduzca la solicitud valida de identificacion."
+
+#: .\views.py:142 .\views.py:213
+msgid "Please pass url and domain"
+msgstr "Por favor pase URL y dominio"
+
+#: .\views.py:160 .\views.py:231
+msgid "Please crawler first."
+msgstr "Por favor, ejecute rastreador primero."
+
+#: .\views.py:396
+msgid "Your state is: PENDING"
+msgstr "Su estado es : PENDIENTE"
+
+#: .\views.py:522 .\views.py:588
+msgid "Please pass a url and domain"
+msgstr "Por favor, pasar una URL y dominio"
+
+#: .\views.py:670
+msgid "Please pass a url"
+msgstr "Por favor, pase una URL"
+
+#: .\views.py:688
+msgid "Website Not Found"
+msgstr "Sitio Web no encontrado"
+
+#: .\views.py:730
+msgid "Please pass email"
+msgstr "Por favor pase de correo electronico"
+
+#: .\views.py:750
+msgid "Database Error."
+msgstr "Error de la base de datos."
+
+#: .\views.py:773
+msgid "Hello"
+msgstr ""

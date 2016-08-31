@@ -165,7 +165,7 @@ class MySpider(scrapy.Spider):
 
                 soup = BeautifulSoup(body,"html.parser")
                 
-                for script in soup(["head","script","style","noscript","footer","link"]):            #remove tags
+                for script in soup(["head","script","style","noscript","footer","link","font"]):            #remove tags
                     script.extract()    # rip it out
 
 
@@ -471,8 +471,136 @@ def main(main_url,main_domain):
 
     #for zxcvb in tags2:
     #    print zxcvb
-    #    print ""        
+    #    print ""
+
+    logo = "";
+    if tags2:
+        for tag in tags2:
+            try:
+                new_soup = BeautifulSoup(str(tag),"html.parser");
+
+                for tagsss in new_soup:
+                    print tag.name
+                    
+                    if tagsss.name == 'img':
+                        logo = tagsss['src']
+                        print tagsss['src']
+                        break;
+
+                if not logo == "":
+                    break;
+            except:
+                pass
+
+
+
+
+
+
+    print "\n\n======================== Footer ============================"
+    footer = []
     
+    #---------- Extract Footer -------------
+    if tags2:
+        for tag in tags2:
+            #print tag
+            #print ""
+            try:
+                new_soup = BeautifulSoup(str(tag),"html.parser");
+
+                
+                for tagsss in new_soup:
+                    try:
+
+                        #print tagsss.getText()
+
+                        if "copyright" in str(tagsss.getText()).lower():
+                            if str(tag) not in footer:
+                                footer.append(str(tag))
+                            break;
+
+                        if "rights reserve" in str(tagsss.getText()).lower():
+                            if str(tag) not in footer:
+                                footer.append(str(tag))
+                            break;
+
+                        if "&copy" in str(tagsss.getText()).lower():
+                            if str(tag) not in footer:
+                                footer.append(str(tag))
+                            break;
+
+                        if "powered by" in str(tagsss.getText()).lower():
+                            if str(tag) not in footer:
+                                footer.append(str(tag))
+                            break;
+
+
+                    except:
+                        pass
+                    
+            except:
+                pass
+
+
+    items_to_delete = []
+
+    for i in range(0,len(footer)):
+        for j in range(i+1,len(footer)):
+            #print i
+            #print j
+            if footer[j] in footer[i] and j not in items_to_delete and i not in items_to_delete:
+                #print "Deleting: "
+                #print footer[j]
+                items_to_delete.append(j);
+                j = j + 1;
+            elif footer[i] in footer[j] and i not in items_to_delete and j not in items_to_delete:
+                #print "Deleting: "
+                #print footer[i]
+                items_to_delete.append(i);
+                i = i + 1;
+
+    footer2 = []
+    for i in range(0,len(footer)):
+        if i not in items_to_delete:
+            footer2.append(footer[i])
+            
+    '''       
+    print ""
+    print ""
+    print ""
+    print footer;
+    '''
+
+    footer = []
+    for i in footer2:
+        try:
+            temp_dict = {};
+            temp_dict['content'] = str(i).replace('"',"'");
+            footer.append(temp_dict)
+        except:
+            pass
+
+    #print ""
+    #print ""
+    #print ""
+    #print footer;
+    
+    print "======================== Footer ============================\n\n"
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #---------- Extracr nav bar ------------
 
     nav = "";
@@ -505,7 +633,7 @@ def main(main_url,main_domain):
                     if flag_final:
                         print "Nav bar is present 1"
                         print "======================================="
-                        print nav.prettify();
+                        #print nav.prettify();
                         print "======================================="
                         flag_final = False;
                         break;
@@ -535,7 +663,7 @@ def main(main_url,main_domain):
                     if flag_final:
                         print "Nav bar is present 2"
                         print "======================================="
-                        print nav.prettify();
+                        #print nav.prettify();
                         print "======================================="
                         break;
             except:
@@ -543,8 +671,8 @@ def main(main_url,main_domain):
 
 
     list_of_dict2 = []
-    with open('nav.json', 'w') as f:
-        json.dump(list_of_dict2, f)
+    #with open('nav.json', 'w') as f:
+    #    json.dump(list_of_dict2, f)
 
     if not flag_final:
         list_of_dict2 = []
@@ -555,15 +683,15 @@ def main(main_url,main_domain):
                 try:
                     anchor = lists.find('a',recursive=False)
                     dictionary = {}
-                    dictionary['name'] = anchor.getText().strip();
+                    dictionary['title'] = anchor.getText().strip();
                     dictionary['url'] = anchor['href'];
                     list_of_dict2.append(dictionary)
                 except:
                     pass
 
                 
-            with open('nav.json', 'w') as f:
-                json.dump(list_of_dict2, f)
+            #with open('nav.json', 'w') as f:
+            #    json.dump(list_of_dict2, f)
         except:
             print "Error"
     else:
@@ -580,15 +708,15 @@ def main(main_url,main_domain):
                                 if tagsss.name == "p":
                                     for tagsss in tagss.find_all('a'):
                                         dictionary = {}
-                                        dictionary['name'] = tagssss.getText().strip().replace("\r","").replace("\n","").replace("\b","").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ");
+                                        dictionary['title'] = tagssss.getText().strip().replace("\r","").replace("\n","").replace("\b","").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ");
                                         dictionary['url'] = tagsss['href'];
                                         list_of_dict2.append(dictionary)
                 except:
                     pass
 
                 
-            with open('nav.json', 'w') as f:
-                json.dump(list_of_dict2, f)
+            #with open('nav.json', 'w') as f:
+            #    json.dump(list_of_dict2, f)
         except:
             print "Error"
 
@@ -642,12 +770,17 @@ def main(main_url,main_domain):
             already.append(qwerty['title'])
     
     #--------------------------- Json Data -----------------------------
-    with open('data.json', 'w') as f:
-        json.dump(list_of_dict, f)
+    #with open('data.json', 'w') as f:
+    #    json.dump(list_of_dict, f)
 
-    #python.exe scraper\scraper_quick.py http://www.campalbeachresort.com/ campalbeachresort.com
-    #return list_of_dict
+    common = []
+    for tag in tags2:
+        dictionary = {}
+        dictionary['content'] = str(tag).replace('"',"'");
+        common.append(dictionary);
+
+    return [json.dumps(list_of_dict2) , json.dumps(footer) , str(logo) ,json.dumps(common)]
 
         
 #main();
-main(["http://www.onedaywithoutgoogle.org/","http://www.onedaywithoutgoogle.org/contact.html","http://www.onedaywithoutgoogle.org/idea.html",],"onedaywithoutgoogle.org");
+#main(["http://www.onedaywithoutgoogle.org/","http://www.onedaywithoutgoogle.org/contact.html","http://www.onedaywithoutgoogle.org/idea.html",],"onedaywithoutgoogle.org");
