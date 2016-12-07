@@ -543,8 +543,8 @@ def main(main_url,main_domain):
 
 
     list_of_dict2 = []
-    with open('nav.json', 'w') as f:
-        json.dump(list_of_dict2, f)
+    #with open('nav.json', 'w') as f:
+    #    json.dump(list_of_dict2, f)
 
     if not flag_final:
         list_of_dict2 = []
@@ -642,12 +642,12 @@ def main(main_url,main_domain):
             already.append(qwerty['title'])
     
     #--------------------------- Json Data -----------------------------
-    with open('data.json', 'w') as f:
-        json.dump(list_of_dict, f)
+    #with open('data.json', 'w') as f:
+    #    json.dump(list_of_dict, f)
 
     #python.exe scraper\scraper_quick.py http://www.campalbeachresort.com/ campalbeachresort.com
-    #return list_of_dict
+    return [json.dumps(list_of_dict) , json.dumps(list_of_dict2)]
 
         
 #main();
-main(["http://www.onedaywithoutgoogle.org/","http://www.onedaywithoutgoogle.org/contact.html","http://www.onedaywithoutgoogle.org/idea.html",],"onedaywithoutgoogle.org");
+#main(["http://www.onedaywithoutgoogle.org/","http://www.onedaywithoutgoogle.org/contact.html","http://www.onedaywithoutgoogle.org/idea.html",],"onedaywithoutgoogle.org");

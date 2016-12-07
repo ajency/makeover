@@ -7,3 +7,9 @@ class first(models.Model):
     reqId = models.CharField(primary_key=True,max_length=255)
     domainName = models.CharField(default='', max_length=512)
     data = models.TextField(default='')
+
+class second(models.Model):
+    reqId = models.CharField(primary_key=True,max_length=255)
+    domainName = models.CharField(default='', max_length=512)
+    data = models.TextField(default='')
+    header = models.TextField(default='')
